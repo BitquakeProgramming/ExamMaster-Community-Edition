@@ -1,4 +1,5 @@
 ﻿using ExamMaster.Backend;
+using ExamMaster.Config;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,6 +83,15 @@ namespace ExamMaster.Frontend
         private void button1_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            foreach (CatalogModel model in GlobalConfig.INSTANCE.Catalogs)
+            {
+                comboBox1.Items.Add(model.DisplayName);
+            }
+            comboBox1.SelectedIndex = 0;
         }
     }
 }

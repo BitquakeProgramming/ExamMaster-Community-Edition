@@ -35,6 +35,11 @@ namespace ExamMaster.Config
         public String SQL_Answer4 = "Antwort4";
         [JsonProperty]
         public String SQL_RightAnswer = "RichtigeAntwort";
+
+        public CatalogModel GetCatalogByName(String name)
+        {
+            return Catalogs.SingleOrDefault<CatalogModel>((i) => i.DisplayName.Equals(name));
+        }
     }
 
     [Serializable]
@@ -42,12 +47,26 @@ namespace ExamMaster.Config
     public class CatalogModel
     {
         private String name;
+        private String displayName;
         private short variations;
         private String sqlVariationName;
         private String sqlTaskName;
 
         [JsonProperty]
-        public String Name
+        public String DisplayName
+        {
+            get
+            {
+                return displayName;
+            }
+            set
+            {
+                displayName = value;
+            }
+        }
+        
+        [JsonProperty]
+        public String SQLName
         {
             get
             {
