@@ -131,5 +131,7 @@ namespace ExamMaster.Config
                 taskTableName = value;
             }
         }
+
+        public string SQLName { get; set; }
     }
 }
