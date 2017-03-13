@@ -1,4 +1,4 @@
-﻿namespace ExamMaster
+﻿namespace ExamMaster.Frontend
 {
     partial class Form1
     {
