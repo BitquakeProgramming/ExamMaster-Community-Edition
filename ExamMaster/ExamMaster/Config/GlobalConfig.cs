@@ -38,7 +38,7 @@ namespace ExamMaster.Config
 
         public CatalogModel GetCatalogByName(String name)
         {
-            return Catalogs.SingleOrDefault<CatalogModel>((i) => i.Name.Equals(name));
+            return Catalogs.SingleOrDefault<CatalogModel>((i) => i.DisplayName.Equals(name));
         }
     }
 
@@ -51,6 +51,7 @@ namespace ExamMaster.Config
         private short variations;
         private String sqlVariationName;
         private String sqlTaskName;
+        private String taskTableName;
 
         [JsonProperty]
         public String DisplayName
@@ -115,6 +116,19 @@ namespace ExamMaster.Config
             set
             {
                 variations = value;
+            }
+        }
+
+        [JsonProperty]
+        public short SQLTaskDbName
+        {
+            get
+            {
+                return taskTableName;
+            }
+            set
+            {
+                taskTableName = value;
             }
         }
     }
