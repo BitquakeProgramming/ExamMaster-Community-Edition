@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamMaster.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,21 @@ namespace ExamMaster.Backend
 {
     public class Backend : IDisposable
     {
-        private String questionCatalog;
+        private CatalogModel questionCatalog;
         private bool hasInited = false;
         private QuestionCatalog currentCatalog;
 
-        public void LoadCatalog(String questionCatalog)
+        public void LoadCatalog(CatalogModel questionCatalog)
         {
             this.questionCatalog = questionCatalog;
             this.hasInited = true;
+
+            String variationQuery = GetQueryFor(questionCatalog, new Random().Next(1, 15));
+        }
+
+        private String GetQueryFor(CatalogModel catalog, int variation)
+        {
+            return "SELECT * FROM " + catalog.SQLName + " WHERE " + catalog.SQLVariationName + " = " + variation;
         }
 
         public QuestionCatalog Catalog
