@@ -52,6 +52,7 @@ namespace ExamMaster.Config
         private String sqlVariationName;
         private String sqlTaskName;
         private String taskTableName;
+        private String taskPrimaryKey;
 
         [JsonProperty]
         public String DisplayName
@@ -120,7 +121,7 @@ namespace ExamMaster.Config
         }
 
         [JsonProperty]
-        public short SQLTaskDbName
+        public String SQLTaskDbName
         {
             get
             {
@@ -131,7 +132,18 @@ namespace ExamMaster.Config
                 taskTableName = value;
             }
         }
-
-        public string SQLName { get; set; }
+        
+        [JsonProperty]
+        public String SQLTaskPrimaryKey
+        {
+            get
+            {
+                return taskPrimaryKey;
+            }
+            set
+            {
+                taskPrimaryKey = value;
+            }
+        }
     }
 }
