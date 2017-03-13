@@ -14,10 +14,12 @@ namespace ExamMaster.Frontend
 {
     public partial class Form1 : Form
     {
+        private Backend.Backend backEnd = new Backend.Backend();
         public Form1()
         {
             InitializeComponent();
         }
+
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -72,7 +74,16 @@ namespace ExamMaster.Frontend
 
         private void button1_Click(object sender, EventArgs e)
         {
-            tabControl.SelectTab("tabPageTest");
+            if(comboBox1.SelectedIndex >= 0)
+            {
+                CatalogModel selected = GlobalConfig.INSTANCE.Catalogs[comboBox1.SelectedIndex];
+                backEnd.LoadCatalog(selected);
+                tabControl.SelectTab("tabPageTest");
+            }
+        }
+
+        private void listQuestions() {
+            
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
@@ -91,7 +102,10 @@ namespace ExamMaster.Frontend
             {
                 comboBox1.Items.Add(model.DisplayName);
             }
-            comboBox1.SelectedIndex = 0;
+            if (comboBox1.Items.Count > 0)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
         }
     }
 }
