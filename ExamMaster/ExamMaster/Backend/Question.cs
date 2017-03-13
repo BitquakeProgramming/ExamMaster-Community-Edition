@@ -17,9 +17,11 @@ namespace ExamMaster.Backend
         // Multiple choice fields
         private bool[] checkboxAnswers;
         private String[] multipleChoiceQuestions;
+        private short rightAnswerMulti;
         
         // Single choice field
         private String singleChoiceAnswer;
+        private String rightAnswerSingle;
 
         public Question(String question, float maxPoints)
         {
@@ -27,9 +29,10 @@ namespace ExamMaster.Backend
             this.maxPoints = maxPoints;
         }
 
-        public void InitMultipleChoice(String[] answers, bool isNumeric = false)
+        public void InitMultipleChoice(String[] answers, short rightAnswer, bool isNumeric = false)
         {
             this.checkboxAnswers = new bool[answers.Length];
+            this.rightAnswerMulti = rightAnswer;
             if (isNumeric)
             {
                 type = QuestionType.MULTIPLE_CHOICE_NUMERIC;
@@ -40,9 +43,10 @@ namespace ExamMaster.Backend
             }
         }
 
-        public void InitSingleChoice(bool isNumeric = false)
+        public void InitSingleChoice(String rightAnswer, bool isNumeric = false)
         {
-            singleChoiceAnswer = ""; 
+            singleChoiceAnswer = "";
+            rightAnswerSingle = rightAnswer;
             if (isNumeric)
             {
                 type = QuestionType.SINGLE_CHOICE_NUMERIC;
@@ -107,6 +111,32 @@ namespace ExamMaster.Backend
             {
                 singleChoiceAnswer = value;
             }
+        }
+
+        public short RightAnswerMultipleChoice
+        {
+            get
+            {
+                return rightAnswerMulti;
+            }
+        }
+
+        public String RightAnswerSingleChoice
+        {
+            get
+            {
+                return rightAnswerSingle;
+            }
+        }
+
+        public bool IsAnswerRight(String answer)
+        {
+            return rightAnswerSingle.ToUpper().Equals(answer.ToUpper());
+        }
+
+        public bool IsAnswerRight(int answer)
+        {
+            return rightAnswerMulti == answer;
         }
     }
 
