@@ -28,8 +28,8 @@ namespace ExamMaster.Database
 
         public QuestionCatalog FillCatalog(CatalogModel model, int varId)
         {
-            string query = "SELCET * FROM " + model.SQLName + " WHERE " + model.SQLVariationName + " = " + varId;
-            MySqlCommand cmd = new MySqlCommand(query, connection);
+            string query1 = "SELCET * FROM " + model.SQLName + " WHERE " + model.SQLVariationName + " = " + varId;
+            MySqlCommand cmd = new MySqlCommand(query1, connection);
 
             MySqlDataReader reader = cmd.ExecuteReader();
             DataTable table = new DataTable();
@@ -38,13 +38,14 @@ namespace ExamMaster.Database
                 int taskID = (Int32)row[model.SQLTaskName];
 
                 // DEEPER *~*
-                MySqlCommand cmd2 = new MySqlCommand(query, connection);
+                string query2 = "SELECT * FROM " + model.SQLTaskDbName + " WHERE " + model.SQLTaskPrimaryKey + " = " + taskID;
+                MySqlCommand cmd2 = new MySqlCommand(query2, connection);
                 MySqlDataReader reader2 = cmd2.ExecuteReader();
                 DataTable table2 = new DataTable();
                 table2.Load(reader2);
                 foreach(DataRow row2 in table2.Rows)
                 {
-
+                    int taskID_ = (Int32)row[model.SQLTaskPrimaryKey];
                 }
             }
 
