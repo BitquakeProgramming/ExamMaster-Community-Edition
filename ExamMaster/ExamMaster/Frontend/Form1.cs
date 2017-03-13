@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamMaster.Backend;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace ExamMaster.Frontend
         {
             InitializeComponent();
         }
+
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
@@ -69,6 +71,7 @@ namespace ExamMaster.Frontend
 
         private void button1_Click(object sender, EventArgs e)
         {
+            tabControl.SelectTab("tabPageTest");
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)

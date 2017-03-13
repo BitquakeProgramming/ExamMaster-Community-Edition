@@ -43,10 +43,10 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageHome = new System.Windows.Forms.TabPage();
+            this.tabPageTest = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.panelQuestionContainer = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -58,7 +58,7 @@
             this.buttonNext = new System.Windows.Forms.Button();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.labelQuestionHeader = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageResult = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
             this.headerBackgroundPanel.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -68,8 +68,8 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPageHome.SuspendLayout();
+            this.tabPageTest.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -291,9 +291,9 @@
             // tabControl
             // 
             this.tabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPageHome);
+            this.tabControl.Controls.Add(this.tabPageTest);
+            this.tabControl.Controls.Add(this.tabPageResult);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -305,34 +305,34 @@
             this.tabControl.TabIndex = 1;
             this.tabControl.TabStop = false;
             // 
-            // tabPage1
+            // tabPageHome
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(560, 402);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPageStartTest";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageHome.Controls.Add(this.tableLayoutPanel1);
+            this.tabPageHome.Location = new System.Drawing.Point(4, 25);
+            this.tabPageHome.Name = "tabPageHome";
+            this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHome.Size = new System.Drawing.Size(560, 402);
+            this.tabPageHome.TabIndex = 0;
+            this.tabPageHome.Text = "tabPageHome";
+            this.tabPageHome.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabPageTest
             // 
-            this.tabPage2.Controls.Add(this.tableLayoutPanel7);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(560, 402);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPageMakeTest";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageTest.Controls.Add(this.tableLayoutPanel7);
+            this.tabPageTest.Location = new System.Drawing.Point(4, 25);
+            this.tabPageTest.Name = "tabPageTest";
+            this.tabPageTest.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTest.Size = new System.Drawing.Size(560, 402);
+            this.tabPageTest.TabIndex = 1;
+            this.tabPageTest.Text = "tabPageTest";
+            this.tabPageTest.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.00722F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.99278F));
-            this.tableLayoutPanel7.Controls.Add(this.panel5, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.panelQuestionContainer, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 0);
             this.tableLayoutPanel7.Cursor = System.Windows.Forms.Cursors.No;
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -342,20 +342,20 @@
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 396F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(554, 396);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
-            // panel5
+            // panelQuestionContainer
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(132, 396);
-            this.panel5.TabIndex = 0;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
+            this.panelQuestionContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            this.panelQuestionContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelQuestionContainer.Location = new System.Drawing.Point(0, 0);
+            this.panelQuestionContainer.Margin = new System.Windows.Forms.Padding(0);
+            this.panelQuestionContainer.Name = "panelQuestionContainer";
+            this.panelQuestionContainer.Size = new System.Drawing.Size(132, 396);
+            this.panelQuestionContainer.TabIndex = 0;
+            this.panelQuestionContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // tableLayoutPanel8
             // 
@@ -518,14 +518,14 @@
             this.labelQuestionHeader.Text = "Test Question Header";
             this.labelQuestionHeader.Click += new System.EventHandler(this.labelQuestionHeader_Click);
             // 
-            // tabPage3
+            // tabPageResult
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(560, 402);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPageSeeResult";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageResult.Location = new System.Drawing.Point(4, 25);
+            this.tabPageResult.Name = "tabPageResult";
+            this.tabPageResult.Size = new System.Drawing.Size(560, 402);
+            this.tabPageResult.TabIndex = 2;
+            this.tabPageResult.Text = "tabPageResult";
+            this.tabPageResult.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -545,8 +545,8 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tabPageHome.ResumeLayout(false);
+            this.tabPageTest.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -577,10 +577,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageHome;
+        private System.Windows.Forms.TabPage tabPageTest;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panelQuestionContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel7;
@@ -592,7 +592,7 @@
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.Button buttonNext;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageResult;
 
     }
 }
