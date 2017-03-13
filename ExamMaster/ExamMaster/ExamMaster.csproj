@@ -48,6 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Backend.cs" />
+    <Compile Include="Backend\Class1.cs" />
+    <Compile Include="Backend\Question.cs" />
+    <Compile Include="Backend\QuestionCatalog.cs" />
+    <Compile Include="Config\GlobalConfig.cs" />
     <Compile Include="Database\DB.cs" />
     <Compile Include="Frontend\Form1.cs">
       <SubType>Form</SubType>
