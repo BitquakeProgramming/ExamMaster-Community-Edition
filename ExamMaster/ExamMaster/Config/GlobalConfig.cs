@@ -98,5 +98,7 @@ namespace ExamMaster.Config
                 variations = value;
             }
         }
+
+        public string SQLName { get; set; }
     }
 }

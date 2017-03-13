@@ -4,39 +4,79 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
+using MySql;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Runtime.InteropServices;
+using ExamMaster.Config;
+using ExamMaster.Backend;
 
 namespace ExamMaster.Database
 {
-    public class DB:IDisposable
+    public class DB:IDisposable : IDisposable
     {
-        DataTable dataTable = new DataTable();
-
+        private MySqlConnection connection;
         public void GetDataTest()
         {
         }
+        public void OpenConnection()
+        {
+            string connectionString = "datasource=localhost;database=binnenschifffahrt;username=root;password=";
+            connection = new MySqlConnection(connectionString)
+            connection.Open();
+        }
+
+        public QuestionCatalog FillCatalog(CatalogModel model, int varId)
+        {
+            string query = "SELCET * FROM " + model.SQLName + " WHERE " + model.SQLVariationName + " = " + varId;
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+            DataTable table = new DataTable();
+            table.Load(reader);
+            foreach(DataRow row in table.Rows){
+                int taskID = (Int32)row[model.SQLTaskName];
+
+                // DEEPER *~*
+                MySqlCommand cmd2 = new MySqlCommand(query, connection);
+                MySqlDataReader reader2 = cmd2.ExecuteReader();
+                DataTable table2 = new DataTable();
+                table2.Load(reader2);
+                foreach(DataRow row2 in table2.Rows)
+                {
+
+                }
+            }
+
+            cmd.Dispose();
+
+        }
+
+        public void CloseConnection()
+        {
+            connection.Close();
+        }
+
         public void GetData()
         {
-            string connectionString = "datasource=localhost;database=t_sbf_binnen;username=root;password=";
-            string query = "select * from t_sbf_binnen";
-
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(query, connection);
-            connection.Open();
-
-            // create data adapter
-            SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-            // this will query your database and return the result to your datatable
-            adapt.Fill(dataTable);
-            connection.Close();
-            adapt.Dispose();
         }
 
         
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
+        private void Dispose(bool managed)
+        {
+            if(managed){
+                connection.Dispose();
+            }
+        }
+
+        ~DB(){
+            Dispose(false);
         }
     }
 }
