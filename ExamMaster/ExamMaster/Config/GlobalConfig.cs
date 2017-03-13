@@ -51,6 +51,8 @@ namespace ExamMaster.Config
         private short variations;
         private String sqlVariationName;
         private String sqlTaskName;
+        private String taskTableName;
+        private String taskPrimaryKey;
 
         [JsonProperty]
         public String DisplayName
@@ -115,6 +117,32 @@ namespace ExamMaster.Config
             set
             {
                 variations = value;
+            }
+        }
+
+        [JsonProperty]
+        public String SQLTaskDbName
+        {
+            get
+            {
+                return taskTableName;
+            }
+            set
+            {
+                taskTableName = value;
+            }
+        }
+
+        [JsonProperty]
+        public String SQLTaskPrimaryKey
+        {
+            get
+            {
+                return taskPrimaryKey;
+            }
+            set
+            {
+                taskPrimaryKey = value;
             }
         }
     }
