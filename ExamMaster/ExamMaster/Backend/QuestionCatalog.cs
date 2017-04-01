@@ -9,12 +9,10 @@ namespace ExamMaster.Backend
     public class QuestionCatalog : List<Question>
     {
         private String catalogName;
-        private int minutesToSolve;
 
-        public QuestionCatalog(String name, int minutes)
+        public QuestionCatalog(String name)
         {
             this.catalogName = name;
-            this.minutesToSolve = minutes;
         }
 
         public String QuestionCatalogName
@@ -22,14 +20,6 @@ namespace ExamMaster.Backend
             get
             {
                 return catalogName;
-            }
-        }
-
-        public int MinutesToSolve
-        {
-            get
-            {
-                return minutesToSolve;
             }
         }
     }

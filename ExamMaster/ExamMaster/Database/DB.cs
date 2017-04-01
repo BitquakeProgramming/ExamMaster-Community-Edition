@@ -8,12 +8,12 @@ using MySql;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
-using ExamMaster.Config;
+using System.Windows.Forms;
 using ExamMaster.Backend;
 
 namespace ExamMaster.Database
 {
-    public class DB:IDisposable : IDisposable
+    public class DB : IDisposable
     {
         private MySqlConnection connection;
         public void GetDataTest()
@@ -22,46 +22,75 @@ namespace ExamMaster.Database
         public void OpenConnection()
         {
             string connectionString = "datasource=localhost;database=binnenschifffahrt;username=root;password=";
-            connection = new MySqlConnection(connectionString)
+            connection = new MySqlConnection(connectionString);
             connection.Open();
         }
 
-        public QuestionCatalog FillCatalog(CatalogModel model, int varId)
+        private QuestionCatalog MakeBinnenCatalog()
         {
-            string query1 = "SELCET * FROM " + model.SQLName + " WHERE " + model.SQLVariationName + " = " + varId;
-            MySqlCommand cmd = new MySqlCommand(query1, connection);
+            return new QuestionCatalog("Binnenschifffahrt");
+        }
 
-            MySqlDataReader reader = cmd.ExecuteReader();
-            DataTable table = new DataTable();
-            table.Load(reader);
-            foreach(DataRow row in table.Rows){
-                int taskID = (Int32)row[model.SQLTaskName];
+        public bool FillCatalogBinnen(ref QuestionCatalog catalog, CatalogModel model, int varId)
+        {
+                string query1 = "SELECT * FROM " + model.SQLCatalogName + " WHERE " + model.SQLVariationName + " = " +
+                                varId;
+                MySqlCommand cmd = new MySqlCommand(query1, connection);
 
-                // DEEPER *~*
-                string query2 = "SELECT * FROM " + model.SQLTaskDbName + " WHERE " + model.SQLTaskPrimaryKey + " = " + taskID;
-                MySqlCommand cmd2 = new MySqlCommand(query2, connection);
-                MySqlDataReader reader2 = cmd2.ExecuteReader();
-                DataTable table2 = new DataTable();
-                table2.Load(reader2);
-                foreach(DataRow row2 in table2.Rows)
+                MySqlDataReader reader = cmd.ExecuteReader();
+                DataTable table = new DataTable();
+                table.Load(reader);
+                foreach (DataRow row in table.Rows)
                 {
-                    int taskID_ = (Int32)row[model.SQLTaskPrimaryKey];
+                    int taskID = (Int32) row[model.SQLTaskName];
+
+                    // DEEPER *~*
+                    string query2 = "SELECT * FROM " + model.SQLTaskDbName + " WHERE " + model.SQL_TaskID + " = " +
+                                    taskID;
+                    MySqlCommand cmd2 = new MySqlCommand(query2, connection);
+                    MySqlDataReader reader2 = cmd2.ExecuteReader();
+                    DataTable table2 = new DataTable();
+                    table2.Load(reader2);
+                    foreach (DataRow row2 in table2.Rows)
+                    {
+                        int taskID_2 = (Int32) row2[model.SQL_TaskID];
+                        object o = row2[model.SQL_Question];
+                        if (!(o is DBNull))
+                        {
+                            Question question = new Question((String) row2[model.SQL_Question], 1,
+                                                             taskID_2);
+                            question.InitMultipleChoice(new string[]
+                            {
+                                (string) row2[model.SQL_Answer1],
+                                (string) row2[model.SQL_Answer2],
+                                (string) row2[model.SQL_Answer3],
+                                (string) row2[model.SQL_Answer4]
+                            }, (Byte) row2[model.SQL_RightAnswer]);
+                            catalog.Add(question);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
                 }
-            }
 
-            cmd.Dispose();
-
+                cmd.Dispose();
+            return true;
         }
 
         public void CloseConnection()
         {
-            connection.Close();
+            if (connection == null) return;
+            try
+            {
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
-
-        public void GetData()
-        {
-        }
-
         
         public void Dispose()
         {

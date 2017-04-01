@@ -16,21 +16,23 @@ namespace ExamMaster.Backend
 
         // Multiple choice fields
         private bool[] checkboxAnswers;
-        private String[] multipleChoiceQuestions;
-        private short rightAnswerMulti;
+        private String[] multipleChoiceAnswers;
+        private int rightAnswerMulti;
         
         // Single choice field
         private String singleChoiceAnswer;
         private String rightAnswerSingle;
-
-        public Question(String question, float maxPoints)
+        private int id;
+        public Question(String question, float maxPoints, int taskID)
         {
             this.questionText = question;
             this.maxPoints = maxPoints;
+            this.Id = taskID;
         }
 
-        public void InitMultipleChoice(String[] answers, short rightAnswer, bool isNumeric = false)
+        public void InitMultipleChoice(String[] answers, int rightAnswer, bool isNumeric = false)
         {
+            this.multipleChoiceAnswers = answers;
             this.checkboxAnswers = new bool[answers.Length];
             this.rightAnswerMulti = rightAnswer;
             if (isNumeric)
@@ -85,11 +87,11 @@ namespace ExamMaster.Backend
             }
         }
 
-        public String[] MultipleChoiceQuestions
+        public String[] MultipleChoiceAnswers
         {
             get
             {
-                return multipleChoiceQuestions;
+                return multipleChoiceAnswers;
             }
         }
 
@@ -113,7 +115,7 @@ namespace ExamMaster.Backend
             }
         }
 
-        public short RightAnswerMultipleChoice
+        public int RightAnswerMultipleChoice
         {
             get
             {
@@ -127,6 +129,17 @@ namespace ExamMaster.Backend
             {
                 return rightAnswerSingle;
             }
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string QuestionText
+        {
+            get { return questionText; }
         }
 
         public bool IsAnswerRight(String answer)
