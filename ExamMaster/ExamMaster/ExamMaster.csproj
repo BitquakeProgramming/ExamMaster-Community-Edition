@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JacksonSoft.CustomTabControl">
+      <HintPath>DLL\JacksonSoft.CustomTabControl.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>DLL\MySql.Data.dll</HintPath>
     </Reference>
@@ -96,8 +99,70 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Backend\readme.txt" />
+    <Content Include="bin\Debug\local\img\Binnen\107.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\108.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\110.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\111.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\112.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\113.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\114.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\115.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\116.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\120.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\121.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\122.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\123.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\124.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\125.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\127.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\129.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\131.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\132.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\145.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\146.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\147.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\148.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\149.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\150.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\151.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\152.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\153.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\154.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\155.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\157.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\17.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\18.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\180.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\183.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\185.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\186.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\188.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\189.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\19.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\192.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\193.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\196.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\198.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\199.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\20.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\201.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\202.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\204.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\21.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\22.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\23.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\24.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\243.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\244.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\25.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\26.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\27.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\28.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\29.gif" />
+    <Content Include="bin\Debug\local\img\Binnen\30.gif" />
     <Content Include="Database\readme.txt" />
     <Content Include="Frontend\readme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
