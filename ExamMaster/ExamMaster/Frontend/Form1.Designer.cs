@@ -81,7 +81,10 @@
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
             this.tabPageResult = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
             this.questionListView1 = new ExamMaster.Frontend.QuestionListView();
+            this.roundProgress1 = new ExamMaster.Frontend.RoundProgress();
             this.tableLayoutPanel1.SuspendLayout();
             this.headerBackgroundPanel.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -107,6 +110,9 @@
             this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel17.SuspendLayout();
             this.tableLayoutPanel18.SuspendLayout();
+            this.tabPageResult.SuspendLayout();
+            this.tableLayoutPanel19.SuspendLayout();
+            this.tableLayoutPanel20.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -869,12 +875,45 @@
             // 
             // tabPageResult
             // 
+            this.tabPageResult.BackColor = System.Drawing.Color.MintCream;
+            this.tabPageResult.Controls.Add(this.tableLayoutPanel19);
             this.tabPageResult.Location = new System.Drawing.Point(4, 25);
             this.tabPageResult.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageResult.Name = "tabPageResult";
             this.tabPageResult.Size = new System.Drawing.Size(581, 329);
             this.tabPageResult.TabIndex = 2;
-            this.tabPageResult.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel19
+            // 
+            this.tableLayoutPanel19.ColumnCount = 1;
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel19.Controls.Add(this.tableLayoutPanel20, 0, 0);
+            this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel19.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+            this.tableLayoutPanel19.RowCount = 2;
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel19.Size = new System.Drawing.Size(581, 329);
+            this.tableLayoutPanel19.TabIndex = 0;
+            // 
+            // tableLayoutPanel20
+            // 
+            this.tableLayoutPanel20.ColumnCount = 3;
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.Controls.Add(this.roundProgress1, 1, 1);
+            this.tableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel20.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel20.Name = "tableLayoutPanel20";
+            this.tableLayoutPanel20.RowCount = 3;
+            this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(575, 223);
+            this.tableLayoutPanel20.TabIndex = 0;
             // 
             // questionListView1
             // 
@@ -893,6 +932,17 @@
             this.questionListView1.UseCompatibleStateImageBehavior = false;
             this.questionListView1.View = System.Windows.Forms.View.Tile;
             this.questionListView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.questionListView1_MouseClick);
+            // 
+            // roundProgress1
+            // 
+            this.roundProgress1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.roundProgress1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundProgress1.Location = new System.Drawing.Point(205, 28);
+            this.roundProgress1.Margin = new System.Windows.Forms.Padding(18, 17, 18, 17);
+            this.roundProgress1.Name = "roundProgress1";
+            this.roundProgress1.ReachedPercentPoints = 100F;
+            this.roundProgress1.Size = new System.Drawing.Size(164, 166);
+            this.roundProgress1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -935,6 +985,9 @@
             this.tableLayoutPanel11.PerformLayout();
             this.tableLayoutPanel17.ResumeLayout(false);
             this.tableLayoutPanel18.ResumeLayout(false);
+            this.tabPageResult.ResumeLayout(false);
+            this.tableLayoutPanel19.ResumeLayout(false);
+            this.tableLayoutPanel20.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -995,6 +1048,9 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
+        private RoundProgress roundProgress1;
     }
 }
 

@@ -68,10 +68,19 @@
     <Compile Include="Frontend\QuestionListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Frontend\RoundProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Frontend\RoundProgress.Designer.cs">
+      <DependentUpon>RoundProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Frontend\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frontend\RoundProgress.resx">
+      <DependentUpon>RoundProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
