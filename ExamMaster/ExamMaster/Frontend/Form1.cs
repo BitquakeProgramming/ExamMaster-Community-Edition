@@ -16,49 +16,14 @@ namespace ExamMaster.Frontend
     {
         private Backend.Backend backEnd = new Backend.Backend();
         private QuestionItem currentQuestion;
+        private bool selfFlag = false;
 
 
         public Form1()
         {
             InitializeComponent();
         }
-
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void headerBackgroundPanel_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void labelQuestionHeader_Click(object sender, EventArgs e)
-        {
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -93,12 +58,7 @@ namespace ExamMaster.Frontend
                 buttonBack.Enabled = false;
             }
         }
-
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
+        
         private void buttonBack_Click(object sender, EventArgs e)
         {
             ((Button)sender).ForeColor = Color.White;
@@ -142,7 +102,7 @@ namespace ExamMaster.Frontend
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            tabControl.ItemSize = new Size(0, 1);
+            tabControl.ItemSize = new Size(1,1);
             backEnd.Init();
             foreach (CatalogModel model in GlobalConfig.INSTANCE.Catalogs)
             {
@@ -156,6 +116,7 @@ namespace ExamMaster.Frontend
 
         private void LoadQuestion(QuestionItem question)
         {
+            PrepareAvoidSelfCheck();
             if (question != null && currentQuestion != question)
             {
                 if (currentQuestion != null)
@@ -179,6 +140,13 @@ namespace ExamMaster.Frontend
                 answer2.Text = currentQuestion.Question.MultipleChoiceAnswers[1];
                 answer3.Text = currentQuestion.Question.MultipleChoiceAnswers[2];
                 answer4.Text = currentQuestion.Question.MultipleChoiceAnswers[3];
+                answerCheck1.Refresh();
+                answerCheck2.Refresh();
+                answerCheck3.Refresh();
+                answerCheck4.Refresh();
+
+
+
                 if (bmp == null)
                 {
                     tableLayoutPanel10.ColumnStyles[0].Width = 0f;
@@ -188,6 +156,7 @@ namespace ExamMaster.Frontend
                     tableLayoutPanel10.ColumnStyles[0].Width = 200f;
                 }
             }
+            EndAvoidSelfCheck();
         }
 
         private void questionListView1_MouseClick(object sender, MouseEventArgs e)
@@ -196,6 +165,23 @@ namespace ExamMaster.Frontend
             if (item != null)
             {
                 LoadQuestion(item);
+
+                if (currentQuestion.Index == questionListView1.Items.Count - 1)
+                {
+                    buttonNext.Text = "Abschließen";
+                    buttonBack.Enabled = true;
+                }
+                else
+                if (currentQuestion.Index == 0)
+                {
+                    buttonBack.Enabled = false;
+                    buttonNext.Text = "Weiter";
+                }
+                else
+                {
+                    buttonBack.Enabled = true;
+                    buttonNext.Text = "Weiter";
+                }
             }
         }
 
@@ -206,6 +192,7 @@ namespace ExamMaster.Frontend
 
         private void answerCheck1_CheckedChanged(object sender, EventArgs e)
         {
+            if (selfFlag) return;
             if (currentQuestion != null)
             {
                 currentQuestion.Question.MultipleChoiceUserAnswers[0] = answerCheck1.Checked;
@@ -228,6 +215,30 @@ namespace ExamMaster.Frontend
             questionListView1.Refresh();
         }
 
+        private void anwerCheck1ByLabel_Click(object sender, EventArgs e)
+        {
+            answerCheck1.Checked = !answerCheck1.Checked;
+            answerCheck1_CheckedChanged(sender, e);
+        }
+        
+        private void anwerCheck2ByLabel_Click(object sender, EventArgs e)
+        {
+            answerCheck2.Checked = !answerCheck2.Checked;
+            answerCheck1_CheckedChanged(sender, e);
+        }
+
+        private void anwerCheck3ByLabel_Click(object sender, EventArgs e)
+        {
+            answerCheck3.Checked = !answerCheck3.Checked;
+            answerCheck1_CheckedChanged(sender, e);
+        }
+
+        private void anwerCheck4ByLabel_Click(object sender, EventArgs e)
+        {
+            answerCheck4.Checked = !answerCheck4.Checked;
+            answerCheck1_CheckedChanged(sender, e);
+        }
+
         private void MouseButtonEnter(object sender, EventArgs e)
         {
             ((Button) sender).ForeColor = Color.White;
@@ -236,6 +247,15 @@ namespace ExamMaster.Frontend
         private void MouseButtonLeave(object sender, EventArgs e)
         {
             ((Button)sender).ForeColor = Color.Black;
+        }
+
+        public void PrepareAvoidSelfCheck()
+        {
+            selfFlag = true;
+        }
+        public void EndAvoidSelfCheck()
+        {
+            selfFlag = false;
         }
     }
 
