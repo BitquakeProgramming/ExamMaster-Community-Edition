@@ -103,6 +103,7 @@ namespace ExamMaster.Frontend
             {
                 maxPoints += backEnd.Catalog[i].MaxPoints;
                 int userAnswer = -1;
+                bool broke = false;
                 for (int j = 0; j < backEnd.Catalog[i].MultipleChoiceUserAnswers.Length; j++)
                 {
                     if (backEnd.Catalog[i].MultipleChoiceUserAnswers[j] == true)
@@ -115,13 +116,13 @@ namespace ExamMaster.Frontend
                         else
                         {
                             // Remove Points and continue with next question
-                            reachedPoints -= backEnd.Catalog[i].MaxPoints;
                             userAnswer = -1;
+                            broke = true;
                             break;
                         }
                     }
                 }
-                if (userAnswer == backEnd.Catalog[i].RightAnswerMultipleChoice)
+                if (userAnswer == backEnd.Catalog[i].RightAnswerMultipleChoice && !broke)
                 {
                     reachedPoints += backEnd.Catalog[i].MaxPoints;
                 }
@@ -133,6 +134,7 @@ namespace ExamMaster.Frontend
         private void Form1_Load(object sender, EventArgs e)
         {
             tabControl.ItemSize = new Size(1, 1);
+            ExceptionHandler.Init(this);
             backEnd.Init();
             foreach (CatalogModel model in GlobalConfig.INSTANCE.Catalogs)
             {
