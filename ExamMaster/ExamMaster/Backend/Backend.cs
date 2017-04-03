@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ExamMaster.Database;
+using ExamMaster.Frontend;
 
 namespace ExamMaster.Backend
 {
@@ -20,6 +21,9 @@ namespace ExamMaster.Backend
 
         private Dictionary<int, String> imageMap = new Dictionary<int, string>();
 
+        /// <summary>
+        /// Initializes the image paths
+        /// </summary>
         public void Init()
         {
             DirectoryInfo dir = new DirectoryInfo(imgDir);
@@ -38,6 +42,11 @@ namespace ExamMaster.Backend
             }
         }
 
+        /// <summary>
+        /// Gets the image by question ID
+        /// </summary>
+        /// <param name="id">The question ID</param>
+        /// <returns>The coresponding Bitmap</returns>
         public Bitmap GetImageFromID(int id)
         {
             if (imageMap.ContainsKey(id))
@@ -46,45 +55,54 @@ namespace ExamMaster.Backend
             }
             return null;
         }
+
+        /// <summary>
+        /// Asks the Database to fill a Catalog with Questions and prepares this Catalog for later use.
+        /// </summary>
+        /// <param name="questionCatalog">The catalog model</param>
+        /// <returns>true if it was loaded successfully</returns>
         public bool LoadCatalog(CatalogModel questionCatalog)
         {
             this.questionCatalog = questionCatalog;
             this.hasInited = true;
 
-            database.OpenConnection();
-
-            currentCatalog = new QuestionCatalog(this.questionCatalog.DisplayName);
             bool canContinue = false;
-            Random rand = new Random();
-            for (int i = 0; canContinue == false || i < 10; i++)
+            if (database.OpenConnection(questionCatalog))
             {
-                canContinue = database.FillCatalogBinnen(ref currentCatalog, this.questionCatalog,
-                                           rand.Next(0, this.questionCatalog.VariationCount) + 1);
-                if (currentCatalog.Count < 30) canContinue = false;
-
-                while (currentCatalog.Count > 30)
+                try
                 {
-                    for (int j = currentCatalog.Count - 1; j >= 0; j--)
+                    currentCatalog = new QuestionCatalog(this.questionCatalog.DisplayName);
+                    Random rand = new Random();
+                    for (int i = 0; canContinue == false || i < 10; i++)
                     {
-                        if (rand.Next(0, 5) == 2)
+                        canContinue = database.FillCatalogBinnen(ref currentCatalog, this.questionCatalog,
+                                                                 rand.Next(0, this.questionCatalog.VariationCount) + 1);
+                        if (currentCatalog.Count < 30) canContinue = false;
+
+                        while (currentCatalog.Count > 30)
                         {
-                            currentCatalog.RemoveAt(j);
-                            if (currentCatalog.Count == 30)
+                            for (int j = currentCatalog.Count - 1; j >= 0; j--)
                             {
-                                break;
+                                if (rand.Next(0, 5) == 2)
+                                {
+                                    currentCatalog.RemoveAt(j);
+                                    if (currentCatalog.Count == 30)
+                                    {
+                                        break;
+                                    }
+                                }
                             }
                         }
+                        if (canContinue) break;
                     }
                 }
-                if (canContinue) break;
+                catch (Exception e)
+                {
+                    // Break
+                }
+                database.CloseConnection();
             }
-            database.CloseConnection();
             return canContinue;
-        }
-
-        private String GetQueryFor(CatalogModel catalog, int variation)
-        {
-            return "SELECT * FROM " + catalog.SQLCatalogName + " WHERE " + catalog.SQLVariationName + " = " + variation;
         }
 
         public QuestionCatalog Catalog
@@ -96,6 +114,9 @@ namespace ExamMaster.Backend
         }
 
         #region Dispose
+        /// <summary>
+        /// Dispose pattern
+        /// </summary>
         void IDisposable.Dispose()
         {
             Dispose(true);

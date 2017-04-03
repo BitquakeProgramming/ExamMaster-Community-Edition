@@ -23,7 +23,7 @@ namespace ExamMaster.Frontend
         {
             InitializeComponent();
         }
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -31,13 +31,7 @@ namespace ExamMaster.Frontend
             {
                 CatalogModel selected = GlobalConfig.INSTANCE.Catalogs[comboBox1.SelectedIndex];
                 bool tryFetchData = backEnd.LoadCatalog(selected);
-                if (!tryFetchData)
-                {
-                    MessageBox.Show(this,
-                                    "Es ist ein Fehler mit der Datenbank aufgetreten. Vorgang konnte nicht forgeführt werden!",
-                                    "Fehler", MessageBoxButtons.OK);
-                }
-                else
+                if (tryFetchData)
                 {
                     PrepareQuestionsPage();
                     tabControl.SelectTab("tabPageTest");
@@ -58,10 +52,10 @@ namespace ExamMaster.Frontend
                 buttonBack.Enabled = false;
             }
         }
-        
+
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            ((Button)sender).ForeColor = Color.White;
+            ((Button) sender).ForeColor = Color.White;
             QuestionItem item = (QuestionItem) questionListView1.Items[currentQuestion.Index - 1];
             LoadQuestion(item);
             if (currentQuestion.Index == 0)
@@ -78,9 +72,10 @@ namespace ExamMaster.Frontend
             {
                 DialogResult result = MessageBox.Show(this,
                                                       "Möchtest du den Versuch abschließen? Es wird dir anschließend nicht mehr möglich sein deine Lösungen zu ändern.",
-                                                      "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                                      "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.None);
                 if (result == DialogResult.Yes)
                 {
+                    PrepareResultPage();
                     tabControl.SelectTab("tabPageResult");
                 }
             }
@@ -100,9 +95,44 @@ namespace ExamMaster.Frontend
             questionListView1.Refresh();
         }
 
+        private void PrepareResultPage()
+        {
+            float maxPoints = 0;
+            float reachedPoints = 0;
+            for (int i = 0; i < backEnd.Catalog.Count; i++)
+            {
+                maxPoints += backEnd.Catalog[i].MaxPoints;
+                int userAnswer = -1;
+                for (int j = 0; j < backEnd.Catalog[i].MultipleChoiceUserAnswers.Length; j++)
+                {
+                    if (backEnd.Catalog[i].MultipleChoiceUserAnswers[j] == true)
+                    {
+                        if (userAnswer == -1)
+                        {
+                            // Add Points
+                            userAnswer = j + 1;
+                        }
+                        else
+                        {
+                            // Remove Points and continue with next question
+                            reachedPoints -= backEnd.Catalog[i].MaxPoints;
+                            userAnswer = -1;
+                            break;
+                        }
+                    }
+                }
+                if (userAnswer == backEnd.Catalog[i].RightAnswerMultipleChoice)
+                {
+                    reachedPoints += backEnd.Catalog[i].MaxPoints;
+                }
+            }
+            roundProgress1.ReachedPercent = (float)reachedPoints / (float) maxPoints * 100f;
+            labelResultPoints.Text = reachedPoints + " von " + maxPoints;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            tabControl.ItemSize = new Size(1,1);
+            tabControl.ItemSize = new Size(1, 1);
             backEnd.Init();
             foreach (CatalogModel model in GlobalConfig.INSTANCE.Catalogs)
             {
@@ -146,7 +176,6 @@ namespace ExamMaster.Frontend
                 answerCheck4.Refresh();
 
 
-
                 if (bmp == null)
                 {
                     tableLayoutPanel10.ColumnStyles[0].Width = 0f;
@@ -171,8 +200,7 @@ namespace ExamMaster.Frontend
                     buttonNext.Text = "Abschließen";
                     buttonBack.Enabled = true;
                 }
-                else
-                if (currentQuestion.Index == 0)
+                else if (currentQuestion.Index == 0)
                 {
                     buttonBack.Enabled = false;
                     buttonNext.Text = "Weiter";
@@ -220,7 +248,7 @@ namespace ExamMaster.Frontend
             answerCheck1.Checked = !answerCheck1.Checked;
             answerCheck1_CheckedChanged(sender, e);
         }
-        
+
         private void anwerCheck2ByLabel_Click(object sender, EventArgs e)
         {
             answerCheck2.Checked = !answerCheck2.Checked;
@@ -246,13 +274,14 @@ namespace ExamMaster.Frontend
 
         private void MouseButtonLeave(object sender, EventArgs e)
         {
-            ((Button)sender).ForeColor = Color.Black;
+            ((Button) sender).ForeColor = Color.Black;
         }
 
         public void PrepareAvoidSelfCheck()
         {
             selfFlag = true;
         }
+
         public void EndAvoidSelfCheck()
         {
             selfFlag = false;

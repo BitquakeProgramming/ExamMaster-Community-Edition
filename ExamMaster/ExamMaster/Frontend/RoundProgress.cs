@@ -15,7 +15,7 @@ namespace ExamMaster.Frontend
 
         private float time = 0;
         private float easing = 0;
-        private float reachedPercentPoints = 100f;
+        private float _reachedPercent = 0f;
 
         public RoundProgress()
         {
@@ -34,21 +34,25 @@ namespace ExamMaster.Frontend
 
             g.FillEllipse(Brushes.LightGray, 0, 0, Width, Height);
             Color lerped;
-            if (easing > 0.75f)
+            float currentPercentage = easing * (ReachedPercent / 100f);
+            if (currentPercentage > 0.75f)
             {
-                lerped = Lerp(Color.Yellow, Color.Green, (easing - 0.75f) * 4f);
+                lerped = Lerp(Color.Yellow, Color.Green, (currentPercentage - 0.75f) * 4f);
             }
             else
             {
-                lerped = Lerp(Color.Red, Color.Yellow, easing * 4f);
+                lerped = Lerp(Color.Red, Color.Yellow, currentPercentage * 4f);
             }
-            g.FillPie(new SolidBrush(lerped), 0, 0, Width, Height, -90, easing * (ReachedPercentPoints / 100f * 360f));
-            g.FillEllipse(Brushes.MintCream, width, width, Width - innerWidth, Height - innerWidth);
+            using (SolidBrush lerpedBrush = new SolidBrush(lerped), darklerpedBrush = new SolidBrush(Color.FromArgb(255,lerped.R / 2, lerped.G / 2, lerped.B / 2)))
+            {
+                g.FillPie(lerpedBrush, 0, 0, Width, Height, -90, easing * (ReachedPercent / 100f * 360f));
+                g.FillEllipse(Brushes.MintCream, width, width, Width - innerWidth, Height - innerWidth);
 
-            string reachedString = "" + (int)Math.Round((easing * ReachedPercentPoints));
-            SizeF size = g.MeasureString(reachedString, Font);
-            g.DrawString(reachedString,Font, Brushes.Green, Width / 2 - size.Width / 2, Height / 2 - size.Height / 2);
-
+                string reachedString = "" + (int) Math.Round(easing * ReachedPercent) + "%";
+                SizeF size = g.MeasureString(reachedString, Font);
+                g.DrawString(reachedString, Font, darklerpedBrush, Width / 2 - size.Width / 2,
+                             Height / 2 - size.Height / 2 + 2);
+            }
         }
 
         private Color Lerp(Color a, Color b, float factor)
@@ -71,22 +75,25 @@ namespace ExamMaster.Frontend
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            time += timer1.Interval * 0.001f * 0.1f; // interval * (1/1000) * (1/duration);
-            if (time > 1) time = 0;
-            easing = EaseInOut(time, 0, 1f, 1);
+            time += timer1.Interval * 0.001f * 0.5f; // interval * (1/1000) * (1/duration);
+            if (time > 1) time = 1;
+            easing = EaseInOut(time, 0, 1, 1);
             Refresh();
         }
 
-        public float ReachedPercentPoints
+        public float ReachedPercent
         {
             get
             {
-                return reachedPercentPoints;
+                return _reachedPercent;
             }
 
             set
             {
-                reachedPercentPoints = value;
+                _reachedPercent = value;
+                time = 0;
+                easing = 0;
+                timer1.Enabled = true;
             }
         }
     }

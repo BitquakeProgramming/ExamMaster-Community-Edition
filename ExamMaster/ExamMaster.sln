@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamMaster", "ExamMaster\ExamMaster.csproj", "{9417F3E7-3AE0-45F8-B458-2A19A662D9F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBSettings", "DBSettings\DBSettings.csproj", "{26C60697-D698-4D45-926D-20B0E35B8F3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9417F3E7-3AE0-45F8-B458-2A19A662D9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9417F3E7-3AE0-45F8-B458-2A19A662D9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9417F3E7-3AE0-45F8-B458-2A19A662D9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26C60697-D698-4D45-926D-20B0E35B8F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26C60697-D698-4D45-926D-20B0E35B8F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26C60697-D698-4D45-926D-20B0E35B8F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26C60697-D698-4D45-926D-20B0E35B8F3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

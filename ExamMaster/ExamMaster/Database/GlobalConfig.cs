@@ -38,6 +38,21 @@ namespace ExamMaster.Database
         private String _sqlTaskPid;
         private String taskTableName;
 
+        public String SQL_TaskID = "P_Id";
+        public String SQL_Question = "Frage";
+        public String SQL_Answer1 = "Antwort1";
+        public String SQL_Answer2 = "Antwort2";
+        public String SQL_Answer3 = "Antwort3";
+        public String SQL_Answer4 = "Antwort4";
+        public String SQL_RightAnswer = "RichtigeAntwort";
+
+        public String _dataSource = "localhost";
+        public Int32 _port = 3306;
+        public String _database = "binnenschifffahrt";
+        public String _username = "root";
+        public String _password = "";
+        public bool _shuffle = true;
+
         [JsonProperty]
         public String DisplayName
         {
@@ -118,23 +133,101 @@ namespace ExamMaster.Database
         }
 
         [JsonProperty]
-        public String SQL_TaskID = "P_Id";
-        [JsonProperty]
-        public String SQL_Question = "Frage";
-        [JsonProperty]
-        public String SQL_Answer1 = "Antwort1";
-        [JsonProperty]
-        public String SQL_Answer2 = "Antwort2";
-        [JsonProperty]
-        public String SQL_Answer3 = "Antwort3";
-        [JsonProperty]
-        public String SQL_Answer4 = "Antwort4";
-        [JsonProperty]
-        public String SQL_RightAnswer = "RichtigeAntwort";
+        public string DataSource
+        {
+            get { return _dataSource; }
+            set { _dataSource = value; }
+        }
 
-        [JsonProperty] public String DataSource = "localhost";
-        [JsonProperty] public String Database = "binnenschifffahrt";
-        [JsonProperty] public String Username = "root";
-        [JsonProperty] public String Password = "";
+        [JsonProperty]
+        public int Port
+        {
+            get { return _port; }
+            set { _port = value; }
+        }
+
+        [JsonProperty]
+        public string Database1
+        {
+            get { return _database; }
+            set { _database = value; }
+        }
+
+        [JsonProperty]
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value; }
+        }
+
+        [JsonProperty]
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; }
+        }
+
+        [JsonProperty]
+        public bool Shuffle
+        {
+            get { return _shuffle; }
+            set { _shuffle = value; }
+        }
+
+        [JsonProperty]
+        public string Database
+        {
+            get { return _database; }
+            set { _database = value; }
+        }
+
+        [JsonProperty]
+        public string SqlRightAnswer
+        {
+            get { return SQL_RightAnswer; }
+            set { SQL_RightAnswer = value; }
+        }
+
+        [JsonProperty]
+        public string SqlTaskId
+        {
+            get { return SQL_TaskID; }
+            set { SQL_TaskID = value; }
+        }
+
+        [JsonProperty]
+        public string SqlQuestion
+        {
+            get { return SQL_Question; }
+            set { SQL_Question = value; }
+        }
+
+        [JsonProperty]
+        public string SqlAnswer1
+        {
+            get { return SQL_Answer1; }
+            set { SQL_Answer1 = value; }
+        }
+
+        [JsonProperty]
+        public string SqlAnswer2
+        {
+            get { return SQL_Answer2; }
+            set { SQL_Answer2 = value; }
+        }
+
+        [JsonProperty]
+        public string SqlAnswer3
+        {
+            get { return SQL_Answer3; }
+            set { SQL_Answer3 = value; }
+        }
+
+        [JsonProperty]
+        public string SqlAnswer4
+        {
+            get { return SQL_Answer4; }
+            set { SQL_Answer4 = value; }
+        }
     }
 }
